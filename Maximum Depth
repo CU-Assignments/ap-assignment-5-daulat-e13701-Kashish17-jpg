@@ -1,0 +1,35 @@
+int height(TreeNode*node){
+    if(node==NULL){
+        return 0;
+    }
+    return 1+max(height(node->left),height(node->right));
+ }
+class Solution {
+public:
+
+    int maxDepth(TreeNode* root) {
+        if(root==NULL){
+            return 0;
+        }
+        TreeNode*curr=root;
+        int count=0;
+        while(curr!=NULL){
+            count++;
+            if(curr->left==NULL){
+                curr=curr->right;
+            }
+            else if(curr->right==NULL){
+                curr=curr->left;
+            }
+            else{
+                if(height(curr->left)>=height(curr->right)){
+                    curr=curr->left;
+                }
+                else{
+                    curr=curr->right;
+                }
+            }
+        }
+        return count;
+    }
+};
